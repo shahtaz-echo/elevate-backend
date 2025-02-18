@@ -72,14 +72,14 @@ Elevate is an open-source self-learning platform that enables users to generate,
 - Python 3.9+
 - Virtual environment (`venv` or `conda`)
 - FastAPI
-- PostgreSQL (or SQLite for local development)
+- PostgreSQL
 
 ### Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/elevate.git
-cd elevate
+git clone https://github.com/shahtaz-echo/elevate-backend
+cd elevate-backend
 
 # Create virtual environment
 python -m venv venv
@@ -89,18 +89,19 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Run the application
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ## API Endpoints
 
 ### Authentication
 
-| Method | Endpoint     | Description         |
-| ------ | ------------ | ------------------- |
-| POST   | /auth/signup | Register a new user |
-| POST   | /auth/login  | Authenticate user   |
-| POST   | /auth/reset  | Reset password      |
+| Method | Endpoint              | Description               |
+| ------ | --------------------- | ------------------------- |
+| POST   | /auth/register        | Register a new user       |
+| POST   | /auth/login           | Authenticate user         |
+| POST   | /auth/forgot-password | Send token to email       |
+| POST   | /auth/reset-password  | Reset password with token |
 
 ### User Profile
 
