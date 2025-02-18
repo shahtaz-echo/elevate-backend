@@ -20,7 +20,7 @@ def run_application() ->FastAPI:
         allow_methods = ["*"],
         allow_headers = ["*"],
     )
-
+ 
     application.add_exception_handler(HTTPException, http_error_handler)
     application.add_exception_handler(RequestValidationError, http422_error_handler)
 
