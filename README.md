@@ -61,7 +61,7 @@ Elevate is an open-source self-learning platform that enables users to generate,
 ## Tech Stack
 
 - **Backend:** FastAPI
-- **Database:** SQLite / PostgreSQL
+- **Database:** PostgreSQL
 - **AI Integration:** LLaMA (LLM API)
 - **Authentication:** OAuth2 / JWT
 
