@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+elevate-dev-env
+.env
+
+# Logs and databases
+*.log
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Cache and dependencies
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Pytest and test artifacts
+.coverage
+.cache/
+tests/__pycache__/
+
+# FastAPI specific
+instance/
+*.db
+
+# Ignore migrations (if using alembic)
+migrations/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Docker files
+.dockerignore
+docker-compose.override.yml
