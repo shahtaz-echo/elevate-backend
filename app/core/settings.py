@@ -17,8 +17,10 @@ class Settings(BaseSettings):
     max_connection_count: int = 10
     min_connection_count: int = 10
 
-    secret_key: SecretStr
-    jwt_token_prefix: str = "Token"
+    jwt_access_secret: SecretStr
+    jwt_refresh_secret: SecretStr
+    
+    jwt_token_prefix: str = "Bearer"
 
     class Config:
         validate_assignment = True
