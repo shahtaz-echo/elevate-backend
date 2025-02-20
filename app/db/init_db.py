@@ -1,4 +1,3 @@
-from sqlalchemy.orm import Session
 from app.db.database import Base, engine
 
 def init_db() -> None:

@@ -37,3 +37,13 @@ class CreatedNewUserInList(BaseModel):
 
     class Config:
         from_attributes = True
+
+class UserUpdateInPayload(BaseModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    bio: Optional[str] = None
+    designation: Optional[str] = None
+    image: Optional[str] = None
+
+    class Config:
+        extra = "forbid"

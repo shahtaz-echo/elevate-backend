@@ -34,7 +34,7 @@ class SecurityJWT:
                     message="User not found",
                 )
             
-            return UserSchema.from_orm(user_model)
+            return user_model
         
         except ValueError as e:
             raise APIError(
