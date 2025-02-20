@@ -41,3 +41,7 @@ migrations/
 # Docker files
 .dockerignore
 docker-compose.override.yml
+
+# Alembic
+alembic/
+alembic.ini

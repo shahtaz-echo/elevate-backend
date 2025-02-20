@@ -1,10 +1,11 @@
 from fastapi import Depends, HTTPException
-from starlette.status import HTTP_400_BAD_REQUEST
+from starlette import status
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.services.auth_config import get_hashed_password, verify_password
 from app.services import jwt
 from app.core.settings import get_settings
+from app.api.dependencies.response import APIError
 
 from app.schema.users import UserCreate, User as UserSchema, LoginPayload
 from app.models.users import User as UserModel
@@ -18,14 +19,16 @@ async def create_user_service(payload:UserCreate, db: Session = Depends(get_db))
 
     if existed_user:
         if existed_user.email == payload.email:
-            raise HTTPException(
-                status_code=HTTP_400_BAD_REQUEST,
-                detail="Email is already registered"
+            raise APIError(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    success=False,
+                    message="Email is already registered",
             )
         else:
-            raise HTTPException(
-                status_code=HTTP_400_BAD_REQUEST,
-                detail="Username is already taken"
+            raise APIError(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                success=False,
+                message="Username is already taken"
             )
     
     hashed_password = get_hashed_password(payload.password)
@@ -66,17 +69,19 @@ async def login_service(payload:LoginPayload, db: Session = Depends(get_db)):
     ).first()
 
     if not existed_user:
-        raise HTTPException(
-            status_code=HTTP_400_BAD_REQUEST,
-            detail="Username does not exist"
+        raise APIError(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            success=False,
+            message="Username does not exist"
         )
     
     password_matched = verify_password(payload.password, existed_user.password)
 
     if not password_matched:
-        raise HTTPException(
-            status_code=HTTP_400_BAD_REQUEST,
-            detail="Password is incorrect"
+        raise APIError(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            success=False,
+            message="Password is incorrect"
         )
    
     access_token = jwt.create_access_token(

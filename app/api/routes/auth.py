@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Body, Depends
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.utils.api_response import APIResponse
-from app.schema.users import UserCreate, CreatedNewUserInList, LoginPayload, TokenInList, User as UserSchema
+from app.api.dependencies.response import APIResponse
+from app.schema.users import UserCreate, CreatedNewUserInList, LoginPayload, TokenInList
 from app.modules.auth import create_user_service, login_service
 from app.db.database import get_db
-from app.services.security import SecurityJWT
 
 router = APIRouter()
 
@@ -17,8 +16,8 @@ async def create_user(
     return APIResponse(
         status_code=200,
         success=True,
+        message="New User Created Successfully!",
         data=CreatedNewUserInList(**created_user),
-        message="New User Created Successfully!"
     )
 
 @router.post("/login", response_model=APIResponse, name="auth:login")
@@ -27,17 +26,6 @@ async def login(login_payload: LoginPayload, db: Session = Depends(get_db)) -> A
     return APIResponse(
         status_code= 200,
         success=True,
-        data = TokenInList(**token),
-        message="User Logged In!"
-    )
-
-@router.get("/profile", response_model=APIResponse, name="auth:user-details")
-async def user_details(
-    user: UserSchema = Depends(SecurityJWT().get_user_from_token)
-) -> APIResponse:
-    return APIResponse(
-        status_code=200,
-        success=True,
-        data=user,
-        message="User Details Received!"
+        message="User Logged In!",
+        data = TokenInList(**token)
     )

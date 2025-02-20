@@ -1,8 +1,8 @@
-from pydantic_settings import BaseSettings
 from typing import List, Dict, Any
-from dotenv import load_dotenv
 from pydantic import PostgresDsn, SecretStr
+from pydantic_settings import BaseSettings
 
+from dotenv import load_dotenv
 load_dotenv()
 
 class Settings(BaseSettings):

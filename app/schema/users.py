@@ -17,19 +17,10 @@ class User(UserBase):
     designation: Optional[str] = None
     image: Optional[str] = None
     created_at: datetime
-    update_at: Optional[datetime] = None 
+    updated_at: Optional[datetime] = None 
 
     class Config:
         from_attributes = True
-
-
-class UserInList(BaseModel):
-    first_name: str
-    last_name: str
-    email: str
-    bio: str
-    image: str
-    designation: str
 
 class TokenInList(BaseModel):
     access_token: str
@@ -38,13 +29,6 @@ class TokenInList(BaseModel):
 class LoginPayload(BaseModel):
     userOrEmail: str
     password: str
-
-class RegisterPayloadInList(BaseModel):
-    first_name: str
-    last_name: str
-    email: str
-    password: str
-    username: str
     
 class CreatedNewUserInList(BaseModel):
     user: User

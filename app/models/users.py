@@ -16,5 +16,5 @@ class User(Base):
     designation = Column(String)
     image = Column(String)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    update_at = Column(DateTime(timezone=True), onupdate=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
